@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  dev-db:
+    image: mongo
+    ports:
+      - "5434:5432"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dev
+      MONGO_INITDB_ROOT_PASSWORD: 123
+    networks:
+      - mohoss
+  # test-db:
+  #   image: postgres:13
+  #   ports:
+  #     - "5435:5432"
+  #   environment:
+  #     POSTGRES_USER: dev
+  #     POSTGRES_PASSWORD: 123
+  #     POSTGRES_DB: nest
+  #   networks:
+  #     - mohoss
+networks:
+  mohoss:
