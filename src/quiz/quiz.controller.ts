@@ -12,7 +12,7 @@ import {
 import { User } from '@prisma/client';
 import { GetUser } from '../auth/decorator';
 import { JwtGuard } from '../auth/guard';
-import { QuestionDto, CreateQuizDto, EditQuizDto } from './dto';
+import { CreateQuizDto, EditQuizDto } from './dto';
 
 import { QuizService } from './quiz.service';
 
@@ -31,41 +31,12 @@ export class QuizController {
     return this.quizService.getQuizById(userId, quizId);
   }
 
-  @Post(':quizId/questions')
-  addQuestion(
-    @GetUser('id') userId: string,
-    @Param('quizId') quizId: string,
-
-    @Body() dto: QuestionDto,
-  ) {
-    return this.quizService.addQuestion(userId, quizId, dto);
-  }
-
-  @Delete(':quizId/questions/:questionId')
-  deleteQuestion(
-    @GetUser('id') userId: string,
-    @Param('quizId') quizId: string,
-    @Param('questionId') questionId: string,
-  ) {
-    return this.quizService.deleteQuestion(userId, quizId, questionId);
-  }
-
-  @Patch(':quizId/questions/:questionId')
-  editQuestion(
-    @GetUser('id') userId: string,
-    @Param('quizId') quizId: string,
-    @Param('questionId') questionId: string,
-    @Body() dto: QuestionDto,
-  ) {
-    return this.quizService.editQuestion(userId, quizId, questionId, dto);
-  }
-
   @Get()
   getMyQuizzes(@GetUser('id') userId: string) {
     return this.quizService.getMyQuizzes(userId);
   }
 
-  @Delete(':quizId')
+  @Patch(':quizId')
   updateQuiz(
     @GetUser('id') userId: string,
     @Param('quizId') quizId: string,

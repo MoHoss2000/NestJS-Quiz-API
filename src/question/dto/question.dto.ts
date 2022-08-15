@@ -12,7 +12,7 @@ import {
 } from 'class-validator';
 
 import { Type } from 'class-transformer';
-import { AnswerOptionDto, ArrayDistinct } from './answer_option_dto';
+import { AnswerOptionDto, ArrayDistinct } from '../../quiz/dto';
 
 export class EditQuestionDto {
   @IsString()
@@ -32,7 +32,7 @@ export class EditQuestionDto {
   options: AnswerOptionDto[];
 }
 
-export class AddQuestionDto extends EditQuestionDto{
+export class AddQuestionDto extends EditQuestionDto {
   @IsMongoId()
   @IsNotEmpty()
   quizId: string;

@@ -113,6 +113,7 @@ model QuizSolution {
 }
 
 type QuestionSolution {
+  questionId    String
   chosenAnswers String[]
   questionScore Float    @default(0)
 }
