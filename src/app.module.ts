@@ -7,7 +7,6 @@ import { QuizModule } from './quiz/quiz.module';
 import { UserModule } from './user/user.module';
 import { QuestionModule } from './question/question.module';
 import { ResponseModule } from './response/response.module';
-import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -20,7 +19,6 @@ import { TestModule } from './test/test.module';
     QuizModule,
     QuestionModule,
     ResponseModule,
-    TestModule,
   ],
 })
 export class AppModule {}
