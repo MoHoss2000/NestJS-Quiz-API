@@ -3,9 +3,10 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Question, AnswerOption } from '@prisma/client';
 import { isMongoId } from 'class-validator';
 import { PrismaService } from '../prisma/prisma.service';
-import { AddQuestionDto, EditQuestionDto } from '../quiz/dto';
+import { AddQuestionDto, AnswerOptionDto, EditQuestionDto } from '../quiz/dto';
 
 @Injectable()
 export class QuestionService {
@@ -54,7 +55,10 @@ export class QuestionService {
 
     return await this.prisma.question.create({
       data: {
-        ...dto,
+        quizId: dto.quizId,
+        multipleAnswers: dto.multipleAnswers,
+        questionText: dto.questionText,
+        options: dto.options as AnswerOption[], // dto.options as AnswerOption[],
       },
     });
   }
@@ -63,7 +67,7 @@ export class QuestionService {
     if (!isMongoId(questionId)) {
       throw new NotFoundException('Invalid question id');
     }
-
+    
     const doc = await this.prisma.question.findFirst({
       where: {
         id: questionId,
@@ -85,7 +89,12 @@ export class QuestionService {
       where: {
         id: questionId,
       },
-      data: { ...dto },
+
+      data: {
+        multipleAnswers: dto.multipleAnswers,
+        questionText: dto.questionText,
+        options: dto.options as AnswerOption[],
+      },
     });
   }
 
