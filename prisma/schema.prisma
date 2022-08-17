@@ -26,25 +26,7 @@ model User {
   @@map("users")
 }
 
-// model AnswerOption {
-//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   answerText String
-//   isCorrect  Boolean @default(false)
-
-//   questionId String
-//   question   Question @relation(fields: [questionId], references: [id])
-
-//   // questionSolutionsIds String[]           @db.ObjectId
-//   // questionSolution     QuestionSolution[] @relation(fields: [questionSolutionsIds], references: [id])
-
-//   @@map("answer_options")
-// }
-
 type AnswerOption {
-  // id         String  @default(uuid())
   answerText String
   isCorrect  Boolean @default(false)
 }
@@ -61,7 +43,6 @@ model Question {
   quizId String
   quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
-  // @@unique([id,])
   @@map("questions")
 }
 
@@ -82,21 +63,6 @@ model Quiz {
   @@map("quizzes")
 }
 
-// model QuestionSolution {
-//   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-//   createdAt     DateTime @default(now())
-//   updatedAt     DateTime @updatedAt
-//   questionScore Float    @default(0)
-
-//   answersIds String[]       @db.ObjectId
-//   answers    AnswerOption[] @relation(fields: [answersIds], references: [id])
-
-//   quizSolutionId String       @db.ObjectId
-//   quizSolution   QuizSolution @relation(fields: [quizSolutionId], references: [id])
-
-//   @@map("answer_solutions")
-// }
-
 model QuizSolution {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
@@ -114,6 +80,20 @@ model QuizSolution {
 
 type QuestionSolution {
   questionId    String
-  chosenAnswers String[]
-  questionScore Float    @default(0)
+  questionText  String
+  chosenAnswers AnswerChoice[]
+  questionScore Float          @default(0)
+}
+
+type AnswerChoice {
+  answerText String
+  isChosen   Boolean
+}
+
+model Test{
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  text      String
+  @@map("tests")
 }

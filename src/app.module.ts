@@ -6,6 +6,8 @@ import { QuizController } from './quiz/quiz.controller';
 import { QuizModule } from './quiz/quiz.module';
 import { UserModule } from './user/user.module';
 import { QuestionModule } from './question/question.module';
+import { ResponseModule } from './response/response.module';
+import { TestModule } from './test/test.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { QuestionModule } from './question/question.module';
     PrismaModule,
     QuizModule,
     QuestionModule,
+    ResponseModule,
+    TestModule,
   ],
 })
 export class AppModule {}

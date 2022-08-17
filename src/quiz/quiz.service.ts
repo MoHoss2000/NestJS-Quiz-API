@@ -28,7 +28,6 @@ export class QuizService {
 
     const quiz = await this.prisma.quiz.findFirst({
       where: {
-        userId: userId,
         id: quizId,
       },
       include: {
@@ -36,24 +35,28 @@ export class QuizService {
           select: {
             id: true,
             multipleAnswers: true,
+            options: true,
             questionText: true,
-            options: {
-              select: {
-                answerText: true,
-              },
-            },
           },
         },
       },
     });
 
     if (!quiz) {
-      throw new NotFoundException(
-        "Quiz not found or you don't have access to this resource",
-      );
+      throw new NotFoundException('Quiz not found');
     }
+    // this is the author of the quiz
+    // allow to see correct answers
+    if (quiz.userId == userId) return quiz;
+    else {
+      quiz.questions.forEach((question) => {
+        question.options.forEach((option) => {
+          delete option.isCorrect;
+        });
+      });
 
-    return quiz;
+      return quiz;
+    }
   }
 
   async createQuiz(userId: string, dto: CreateQuizDto) {
@@ -108,6 +111,43 @@ export class QuizService {
     return await this.prisma.quiz.delete({
       where: {
         id: quizId,
+      },
+    });
+  }
+
+  async getQuizResponses(userId: string, quizId: string, pageNo: number) {
+    await this.validateQuizOwnership(userId, quizId);
+
+    if (pageNo < 1) throw new ForbiddenException('pageNo must be 1 or greater');
+
+    const totalCount = await this.prisma.quizSolution.count();
+
+    const docs = await this.prisma.quizSolution.findMany({
+      skip: (pageNo - 1) * 10,
+      take: 10,
+      where: {
+        quizId,
+      },
+    });
+
+    return {
+      pageNo: pageNo,
+      count: docs.length,
+      totalCount,
+      data: [...docs],
+    };
+  }
+
+  async getQuizResponseById(
+    userId: string,
+    quizId: string,
+    responseId: string,
+  ) {
+    await this.validateQuizOwnership(userId, quizId);
+
+    return await this.prisma.quizSolution.findUnique({
+      where: {
+        id: responseId,
       },
     });
   }
