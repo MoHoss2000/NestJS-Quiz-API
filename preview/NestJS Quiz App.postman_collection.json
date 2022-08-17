@@ -1,0 +1,725 @@
+{
+	"info": {
+		"_postman_id": "c70f7ae1-59f0-4279-80ab-a65cf002aba5",
+		"name": "NestJS Quiz App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "mo@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "mo@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/signin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "question",
+			"item": [
+				{
+					"name": "create_question (single)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\": \"62fc377ff2a0f32230ca9610\",\r\n    \"questionText\": \"Moon is a star\",\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"Yes\"\r\n        },\r\n        {\r\n            \"answerText\": \"No\",\r\n            \"isCorrect\": true\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"question"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_question (multiple)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\": \"62fc377ff2a0f32230ca9610\",\r\n    \"multipleAnswers\": true,\r\n    \"questionText\": \"Temperature can be measured in\",\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"Kelvin\",\r\n            \"isCorrect\": true\r\n        },\r\n        {\r\n            \"answerText\": \"Fahrenheit\",\r\n            \"isCorrect\": true\r\n        },\r\n        {\r\n            \"answerText\": \"Gram\",\r\n            \"isCorrect\": false\r\n        },\r\n        {\r\n            \"answerText\": \"Celsius\",\r\n            \"isCorrect\": true\r\n        },\r\n        {\r\n            \"answerText\": \"Liters\",\r\n            \"isCorrect\": false\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/question",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"question"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_question",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questionText\":  \"Moon is a star?\",\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"Yes\"\r\n        },\r\n        {\r\n            \"answerText\": \"No\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/question/62fbf4f8ea098f69f867056c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"question",
+								"62fbf4f8ea098f69f867056c"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_question",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questionText\": \"Choose a correct answer\",\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"da\",\r\n            \"isCorrect\": true\r\n        },\r\n        {\r\n            \"answerText\": \"da1\"\r\n        },\r\n        {\r\n            \"answerText\": \"da2\"\r\n        },\r\n        {\r\n            \"answerText\": \"da3\"\r\n        },\r\n        {\r\n            \"answerText\": \"da4\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/question/62fbf4f8ea098f69f867056c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"question",
+								"62fbf4f8ea098f69f867056c"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "quiz",
+			"item": [
+				{
+					"name": "create_quiz",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "dada",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Test Quiz 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/quiz",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_quizzes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "dada",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fd",
+									"value": "fd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/quiz",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_quiz_responses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "dada",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fd",
+									"value": "fd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/quiz/62fc377ff2a0f32230ca9610/responses?pageNo=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz",
+								"62fc377ff2a0f32230ca9610",
+								"responses"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								},
+								{
+									"key": "pageNo",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_quiz_response_by_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "dada",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "fd",
+									"value": "fd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/quiz/62f8e63d7f8b7be8ead6229e/reponses/responseId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz",
+								"62f8e63d7f8b7be8ead6229e",
+								"reponses",
+								"responseId"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_quiz_by_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"questionText\": \"Choose a correct answer 3\",\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"da\",\r\n            \"isCorrect\": false\r\n        },\r\n        {\r\n            \"answerText\": \"da1\",\r\n            \"isCorrect\": true\r\n        },\r\n        {\r\n            \"answerText\": \"da2\"\r\n        },\r\n        {\r\n            \"answerText\": \"da3\"\r\n        },\r\n        {\r\n            \"answerText\": \"da4\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/quiz/62fc377ff2a0f32230ca9610",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz",
+								"62fc377ff2a0f32230ca9610"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_quiz",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"options\": [\r\n        {\r\n            \"answerText\": \"hello world 2\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/quiz/62f7990de5ff9bbdca059885",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz",
+								"62f7990de5ff9bbdca059885"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit_quiz",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"published\": true\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/quiz/62fc377ff2a0f32230ca9610",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"quiz",
+								"62fc377ff2a0f32230ca9610"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "response",
+			"item": [
+				{
+					"name": "submit_response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\": \"62fc377ff2a0f32230ca9610\",\r\n    \"questionsAnswers\": [\r\n        [\"Yes\"],\r\n        [\"Kelvin\", \"Fahrenheit\"]\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/response",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_user_responses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\": \"62f8e63d7f8b7be8ead6229e\",\r\n    \"questionsAnswers\": [\r\n        [\"Yes\"],\r\n        [\"Kelvin\", \"Fahrenheit\", \"Gram\"]\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/response",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_response_by_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quizId\": \"62f8e63d7f8b7be8ead6229e\",\r\n    \"questionsAnswers\": [\r\n        [\"Yes\"],\r\n        [\"Kelvin\", \"Fahrenheit\", \"Gram\"]\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/response/62fc3944487bdc23245b5849",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"response",
+								"62fc3944487bdc23245b5849"
+							],
+							"query": [
+								{
+									"key": "sa",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "da",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MmZjMzc0NGYyYTBmMzIyMzBjYTk2MGYiLCJlbWFpbCI6Im1vQHRlc3QuY29tIiwiaWF0IjoxNjYwNjk2NDEzLCJleHAiOjE2NjE1NjA0MTN9.7tfyHKIdcUIjGlGOGgPwAvP1jL0PCXFvQBuTQJ_iUyo",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:3000/api",
+			"type": "string"
+		}
+	]
+}

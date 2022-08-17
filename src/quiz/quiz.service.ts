@@ -97,6 +97,16 @@ export class QuizService {
       throw new ForbiddenException('You cannot edit a published quiz');
     }
 
+    const quizQuestions = await this.prisma.question.count({
+      where: {
+        quizId,
+      },
+    });
+
+    if (quizQuestions < 1 || quizQuestions > 10) {
+      throw new ForbiddenException('Quizzes must have from 1 to 10 questions');
+    }
+
     return await this.prisma.quiz.update({
       where: {
         id: quizId,

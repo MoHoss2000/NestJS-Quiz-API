@@ -69,6 +69,6 @@ export class QuizController {
     @Param('quizId') quizId: string,
     @Param('responseId') responseId: string,
   ) {
-    return this.quizService.getQuizById(userId, quizId);
+    return this.quizService.getQuizResponseById(userId, quizId, responseId);
   }
 }
