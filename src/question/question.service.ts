@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { Question, AnswerOption } from '@prisma/client';
 import { isMongoId } from 'class-validator';
+import { debugPort } from 'process';
 import { PrismaService } from '../prisma/prisma.service';
 import { AddQuestionDto, AnswerOptionDto, EditQuestionDto } from '../quiz/dto';
 
@@ -67,7 +68,21 @@ export class QuestionService {
     if (!isMongoId(questionId)) {
       throw new NotFoundException('Invalid question id');
     }
-    
+
+    const correctOptions = dto.options.filter((option) => option.isCorrect);
+
+    if (!dto.multipleAnswers && correctOptions.length != 1) {
+      throw new ForbiddenException(
+        'Single answer questions should have exactly one correct option',
+      );
+    }
+
+    if (dto.multipleAnswers && correctOptions.length < 2) {
+      throw new ForbiddenException(
+        'Multiple answer questions should have more than one correct option',
+      );
+    }
+
     const doc = await this.prisma.question.findFirst({
       where: {
         id: questionId,
