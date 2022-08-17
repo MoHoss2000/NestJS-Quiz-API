@@ -103,9 +103,12 @@ export class QuizService {
       },
     });
 
-    if (quizQuestions < 1 || quizQuestions > 10) {
-      throw new ForbiddenException('Quizzes must have from 1 to 10 questions');
-    }
+    if (dto.published === true)
+      if (quizQuestions < 1 || quizQuestions > 10) {
+        throw new ForbiddenException(
+          'Cannot publish quiz. Quizzes must have from 1 to 10 questions',
+        );
+      }
 
     return await this.prisma.quiz.update({
       where: {
